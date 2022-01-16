@@ -1,0 +1,15 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+requests = "*"
+gunicorn = "==20.0.4"
+Django = "*"
+Pillow = "==8.0.1"
+
+[dev-packages]
+
+[requires]
+python_version = "3.9"
