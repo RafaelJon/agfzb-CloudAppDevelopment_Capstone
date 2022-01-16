@@ -6,6 +6,6 @@
     buildpack: python_buildpack
   - name: djangoapp-nginx
     routes:
-      - route: rafaelcapstone191.us-south.cf.appdomain.cloud
+      - route: rafaelcapstone191.us-south.cf.appdomain.cloud/static
     memory: 128M
     buildpack: staticfile_buildpack
