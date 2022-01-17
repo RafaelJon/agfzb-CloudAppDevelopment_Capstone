@@ -20,7 +20,7 @@ class CarMake(models.Model):
     description = models.CharField(max_length=30)
 
     def __str__(self):
-      return ("Car name: {0}, description: {1}".format(self.name, self.description))
+        return ("Car name: {0}, description: {1}".format(self.name, self.description))
 
 
 # <HINT> Create a Car Model model `class CarModel(models.Model):`:
@@ -32,7 +32,7 @@ class CarModel(models.Model):
     year = models.DateField()
 
     def __str__(self):
-      return ("Car name: {0}, type: {1}".format(self.name, self.car_type))
+        return ("Car name: {0}, type: {1}".format(self.name, self.car_type))
 
 
 # <HINT> Create a plain Python class `CarDealer` to hold dealer data
@@ -49,7 +49,7 @@ class CarDealer:
         self.zip = zip
 
     def __str__(self):
-        return "Dealer name: " + self.full_name
+        return "Dealer name: " + self.full_name + " " + str(self.id)
 
 
 # <HINT> Create a plain Python class `DealerReview` to hold review data
