@@ -71,12 +71,10 @@ def get_dealers_from_cf(url, dealerId=-1):
     results = []
     if dealerId >= 0:
         json_result = get_request(url,  dealerId=dealerId)
-        print(json_result)
     else:
         json_result = get_request(url)
     if json_result:
-        if "rows" in json_result["body"]:
-            print("rows")
+        if "rows" in json_result["body"] and len(json_result["body"]["rows"]) > 0:
             dealers = json_result["body"]["rows"]
             for dealer in dealers:
                 dealer_doc = dealer["doc"]
@@ -85,8 +83,7 @@ def get_dealers_from_cf(url, dealerId=-1):
                                     short_name=dealer_doc["short_name"],
                                     st=dealer_doc["st"], zip=dealer_doc["zip"])
                 results.append(dealer_obj)
-        elif "docs" in json_result["body"]:
-            print("doc")
+        elif "docs" in json_result["body"] and len(json_result["body"]["docs"]) > 0:
             dealer_doc = json_result["body"]["docs"][0]
             dealer_obj = CarDealer(address=dealer_doc["address"], city=dealer_doc["city"], full_name=dealer_doc["full_name"],
                                 id=dealer_doc["id"], lat=dealer_doc["lat"], long=dealer_doc["long"],

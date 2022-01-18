@@ -99,17 +99,17 @@ def get_dealer_details(request, dealer_id):
 # Create a `add_review` view to submit a review
 def add_review(request, dealer_id):
     context = {}
-    if request.method == 'GET':
-        url = "https://1320aaac.us-south.apigw.appdomain.cloud/api/dealership/"
-        dealership = get_dealers_from_cf(url, dealerId=dealer_id)
-        if len(dealership) == 0:
-            return redirect("djangoapp:dealer_details", dealer_id=dealer_id)
-        carModel = CarModel.objects.all().filter(dealer_id=int(dealer_id))
-        context["dealership"] = dealership[0]
-        context["cars"] = carModel
-        return render(request, 'djangoapp/add_review.html', context)
-    elif request.method == 'POST':
-        if request.user.is_authenticated:
+    if request.user.is_authenticated:
+        if request.method == 'GET':
+            url = "https://1320aaac.us-south.apigw.appdomain.cloud/api/dealership/"
+            dealership = get_dealers_from_cf(url, dealerId=dealer_id)
+            if len(dealership) == 0:
+                return redirect("djangoapp:dealer_details", dealer_id=dealer_id)
+            carModel = CarModel.objects.all().filter(dealer_id=int(dealer_id))
+            context["dealership"] = dealership[0]
+            context["cars"] = carModel
+            return render(request, 'djangoapp/add_review.html', context)
+        elif request.method == 'POST':
             review = {}
             review["time"] = datetime.utcnow().isoformat()
             review["name"] = request.user.username
@@ -129,7 +129,6 @@ def add_review(request, dealer_id):
             
             json_payload = {}
             json_payload["review"] = review
-            print(json_payload)
             url = "https://1320aaac.us-south.apigw.appdomain.cloud/api/review/"
             result = post_review(url, json_payload)
     return redirect("djangoapp:dealer_details", dealer_id=dealer_id)
